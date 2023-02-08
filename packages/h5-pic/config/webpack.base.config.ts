@@ -1,6 +1,5 @@
 import { Configuration } from 'webpack';
 import { resolve } from 'path';
-// @ts-ignore
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import {CleanWebpackPlugin} from "clean-webpack-plugin";
 
@@ -8,7 +7,7 @@ export default {
     entry: resolve(__dirname, '../src/main.tsx'),
     output: {
         path: resolve(__dirname, '../dist'),
-        filename: 'h5.bundle.[hash].js',
+        filename: '[name].h5.bundle.[hash].js',
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -24,11 +23,32 @@ export default {
                 use: {
                     loader: 'babel-loader',
                 },
+                sideEffects: true
             },
         ],
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js'], // add .tsx, .ts
     },
+    optimization: {
+        minimize: true,
+        sideEffects: true,
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                    priority: 10,
+                },
+                common: {
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: 'all',
+                    name: 'common',
+                    priority: 9
+                }
+            }
+        }
+    }
 
 } as Configuration;

@@ -1,0 +1,21 @@
+{
+  "name": "qiyuan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "qiyuan": "bin/qiyuan.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "consola": "^2.15.3",
+    "figlet": "^1.5.2"
+  }
+}
